@@ -1,0 +1,38 @@
+Rectangle API
+Overview
+This API provides functionality to detect intersections between a given segment and stored rectangles in the database. The main capabilities of the API include receiving input segments and returning a list of rectangles that intersect with these segments.
+
+Architecture
+Controllers
+The RectanglesController handles incoming HTTP POST requests at the /intersect endpoint. This design leverages asynchronous programming to manage the potentially high load and ensure the API remains responsive.
+
+Models
+Two models are defined, Rectangle and Segment, to clearly represent the data structures used by the application. These models are utilized throughout the application to manage data flow and ensure type safety.
+
+Repositories
+The RectangleRepository abstracts data access logic from the controllers. It provides methods for querying the database for rectangles that intersect with a given segment. This separation of concerns makes the code more maintainable and testable.
+
+Database
+We use Entity Framework Core with a SQLite database for simplicity and demonstration purposes. The ApplicationDbContext class manages the connection and schema of the database. The database is configured to operate in-memory for quick setup and teardown during development and testing phases.
+
+Geometry Helper
+The GeometryHelper class provides static methods to determine intersections between segments and rectangles. It includes mathematical computations to handle geometry based calculations, crucial for the core functionality of checking segment-rectangle intersections.
+
+Key Decisions
+Asynchronous API
+The asynchronous nature of the API endpoint ensures that the server can handle multiple requests efficiently, an important consideration for services expecting high traffic or requiring heavy computations.
+
+Entity Framework Core
+We chose Entity Framework Core for ORM to leverage its powerful, developer-friendly data querying capabilities and to reduce the amount of boilerplate code needed for data access. This choice also supports a wide range of database systems, making our application more adaptable to different production environments.
+
+Geometry Calculation
+The algorithm used for detecting intersections between segments and rectangle edges is based on geometric principles, ensuring accuracy and efficiency. Special attention was given to handle both general intersection cases and edge cases where segments may touch at endpoints.
+
+Testing
+Unit tests and integration tests are included to verify the functionality of geometric calculations and database interactions respectively. This ensures that the system behaves as expected and improves the reliability of the application.
+
+Setup and Running
+Details on how to set up and run the application are provided, including how to initialize the database, configure the server, and start the application. Swagger is integrated for API documentation and easy testing of endpoints.
+
+Conclusion
+This API is designed with performance and scalability in mind, making it suitable for applications requiring robust geometric computation and data handling capabilities.
